@@ -1,0 +1,11 @@
+*.xml
+*.pdb
+*.sln
+*.csproj
+*.suo
+*.config
+**/debug
+**/Properties
+**/.idea
+*.iml
+*.user
