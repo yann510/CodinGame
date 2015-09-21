@@ -44,6 +44,7 @@ function setNumber()
 
 function arraySearch(array, value)
 {
+	printErr("Looking for:" + value);
 	for (var i = 0; i < array.length; i++)
 		if (array[i] === value)
 		{
@@ -68,24 +69,26 @@ function writeMayanAnswer(result)
 		for (var i = startingBase; i >= 0; i--)
 		{
 			var modulo = result % Math.pow(20, i);
-			if (modulo == result || modulo == 0)
+			if (modulo == 0)
 			{
 				var numberOfTimes = result / Math.pow(20, i);
-				mayanAnswer += number[numberOfTimes];
 			}
 			else
 			{
 				var tempResult = result - modulo;
 				var numberOfTimes = tempResult / Math.pow(20, i);
-				mayanAnswer += number[numberOfTimes];
 			}
+			mayanAnswer += number[numberOfTimes];
+
+			printErr("result:" + result + " | normal number:" + numberOfTimes);
+
 			result = result - Math.pow(20, i) * numberOfTimes;
 			mayanAnswer += "\n";
 		}
 	}
 	else
 	{
-		mayanAnswer+= number[0];
+		mayanAnswer += number[0];
 	}
 	printErr("Mayan answer:\n" + mayanAnswer);
 	return mayanAnswer;
@@ -137,16 +140,13 @@ function readMayanNumber(mayanNumber)
 			mayanArray[i] += mayanNumber.substring(j * (l + 1), (j + 1) * (l + 1));
 		}
 		mayanNumber = mayanNumber.replace(mayanArray[i], "");
-		if ((mayanArray[i].match(/\n/g) || []).length == 4)
-		{
-			mayanArray[i] = trim(mayanArray[i], "\n ");
-		}
+		mayanArray[i] = trim(mayanArray[i], "\n ");
 	}
 
-	//printErr("Mayan array:\n" + mayanArray[1]);
+	printErr("Mayan array:\n" + writeArray(mayanArray));
 	for (var i = startingBase; i >= 0; i--)
 	{
-		printErr("Mayannumber calculus:\n"+mayanArray[i]);
+		printErr("Mayannumber calculus:\n" + mayanArray[i]);
 		var nb = arraySearch(number, mayanArray[i]);
 		printErr("Calculations:" + nb + " * " + Math.pow(20, i));
 		result += nb * Math.pow(20, i);
@@ -178,6 +178,7 @@ setNumber();
 //writeArray(number);
 
 var keys = Object.keys(number);
+//writeArray(keys);
 
 var s1 = parseInt(readline());
 
